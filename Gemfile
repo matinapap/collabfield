@@ -36,6 +36,7 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
+gem 'dotenv-rails'
 
 
 group :development, :test do

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # Devise authentication with omniauth callbacks
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks'
+  }
+
+  # Posts routes
   resources :posts
-  
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
