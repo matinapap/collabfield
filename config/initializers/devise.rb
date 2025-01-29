@@ -32,10 +32,9 @@ Devise.setup do |config|
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
-  config.omniauth :google_oauth2, ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"]
-  config.omniauth :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"]
-  config.omniauth :twitter, ENV["TWITTER_API_KEY"], ENV["TWITTER_API_SECRET"]
-  
+  config.omniauth :google_oauth2, "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", scope: 'email,profile'
+  config.omniauth :facebook, "FACEBOOK_APP_ID", "FACEBOOK_APP_SECRET", scope: 'email'
+  config.omniauth :twitter, "TWITTER_API_KEY", "TWITTER_API_SECRET"
   
 
 

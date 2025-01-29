@@ -18,6 +18,9 @@ module Collabfield
       end
     end
 
+    ENV['GOOGLE_CLIENT_ID'] = "your_google_client_id"
+ENV['GOOGLE_CLIENT_SECRET'] = "your_google_client_secret"
+
     # Άλλες ρυθμίσεις...
   end
 end

@@ -33,9 +33,10 @@ gem 'bootstrap_form'
 #Authentification
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-google-oauth2'
-gem 'omniauth-facebook'
-gem 'omniauth-twitter'
+gem 'omniauth-google-oauth2' # Για Google
+gem 'omniauth-facebook' # Για Facebook
+gem 'omniauth-twitter' # Για Twitter
+
 gem 'dotenv-rails'
 
 
