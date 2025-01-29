@@ -28,6 +28,9 @@ gem 'bootstrap', '~> 5.0.0'
 gem 'sassc-rails', '>= 2.1.2'
 gem 'jquery-rails'
 
+#Authentification
+gem 'devise'
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
