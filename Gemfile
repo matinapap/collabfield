@@ -27,9 +27,16 @@ gem "thruster", require: false
 gem 'bootstrap', '~> 5.0.0'
 gem 'sassc-rails', '>= 2.1.2'
 gem 'jquery-rails'
+gem 'bootstrap_form'
+
 
 #Authentification
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
+
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
