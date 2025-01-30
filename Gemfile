@@ -29,8 +29,7 @@ gem 'sassc-rails', '>= 2.1.2'
 gem 'jquery-rails'
 gem 'bootstrap_form'
 
-
-#Authentification
+# Authentication
 gem 'devise'
 gem 'omniauth'
 gem 'omniauth-google-oauth2' # Για Google
@@ -38,7 +37,6 @@ gem 'omniauth-facebook' # Για Facebook
 gem 'omniauth-twitter' # Για Twitter
 
 gem 'dotenv-rails'
-
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

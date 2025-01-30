@@ -1,22 +1,94 @@
-.navbar-default, .navbar-toggle:focus, .collapsed, button.navbar-toggle {
-    background: $navbarColor !important;
-    border: none;
-    a {
-      color: white !important;
-    }
+nav {
+  .col-sm-5, .col-sm-7 {
+    padding-top: 0px;
   }
 
-  nav {
-    .navbar-header {
+  .navbar-header {
       width: 100%;
+
       button, .navbar-brand {
         transition: opacity 0.15s;
+        margin-top: 0.5px;
       }
+
       button {
-        margin-right: 0;
+        margin-right: 10;
       }
+
       button:hover, .navbar-brand:hover {
         opacity: 0.8;
       }
-    }
   }
+}
+
+.navbar-default, .navbar-fixed-top, .navbar-toggle:focus, .collapsed, button.navbar-toggle {
+    background: $navbarColor !important;
+    border: none;
+
+    a {
+      color: white !important;
+    }
+}
+
+.pc-menu {
+    margin-left: 1000px;
+}
+  
+.mobile-menu {
+    i {
+      color: white;
+    }
+
+    ul {
+      padding: 0px;
+    }
+
+    a {
+      display: block;
+      padding: 10px 0px 10px 25px !important;
+    }
+
+    a:hover {
+      background: white !important;
+      color: black !important;
+      i {
+        color: black;
+      }
+    }
+}
+  
+.icon-bar {
+    background-color: white !important;
+}
+  
+.active a {
+    background: $navbarColor !important;
+    border-bottom: solid 5px white;
+}
+  
+.dropdown-toggle, .dropdown-menu {
+    background: $navbarColor !important;
+    border-style: hidden;
+}
+  
+.dropdown-menu a:hover {
+    color: black !important;
+    background: white !important;
+}
+
+.brand-mobile {
+    font-size: 40px;
+}
+  
+.navigation-items {
+  position: relative;
+  top: 0;
+  left: auto;
+}
+
+  
+.navbar-header {
+    .open {
+      width: 36px;
+    }
+}
