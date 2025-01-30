@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   # Devise με OmniAuth
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, :controllers => {:registrations => "registrations"}, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   # Login route για απλή σύνδεση
   devise_scope :user do
