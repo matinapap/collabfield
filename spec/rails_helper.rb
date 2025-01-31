@@ -37,11 +37,12 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
   ]
-
+  
   config.before(:suite) do
     if ActiveRecord::Base.connection.tables.empty?
       Rails.application.load_tasks
@@ -73,16 +74,18 @@ RSpec.configure do |config|
 
   # Use factory_bot_rails (if you're using it instead of factory_girl_rails)
   require 'factory_bot_rails'
-  
+  config.include FactoryBot::Syntax::Methods
+
   # Include Devise helpers for feature specs
   config.include Devise::Test::IntegrationHelpers, type: :feature
-  config.include FactoryBot::Syntax::Methods
   
   # Specify JavaScript driver
   Capybara.javascript_driver = :selenium_chrome
   
   # Configure Capybara server
   Capybara.server = :puma
+  # In rails_helper.rb
+  Dir[Rails.root.join('spec/factories/**/*.rb')].each { |file| require file }
 
   # Configure RSpec to infer spec type based on file location
   config.infer_spec_type_from_file_location!

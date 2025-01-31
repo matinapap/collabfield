@@ -37,7 +37,6 @@ gem 'omniauth-facebook' # Για Facebook
 gem 'omniauth-twitter' # Για Twitter
 
 gem 'rspec-rails', '~> 6.0'
-gem 'factory_bot_rails'
 gem 'rails-controller-testing'
 gem 'headless'
 gem 'database_cleaner-active_record'
@@ -58,4 +57,5 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'factory_bot_rails'
 end
