@@ -6,7 +6,7 @@ gem "rails", "~> 8.0.1"
 # The modern asset pipeline for Rails [https://github.com/rails/propshaft]
 gem "propshaft"
 
-# Gems για την βάση δεδομένων και άλλες απαραίτητες βιβλιοθήκες
+# Gems for the database and essential libraries
 gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
@@ -14,16 +14,12 @@ gem "turbo-rails"
 gem "stimulus-rails"
 gem "jbuilder"
 
-# Gems για την ανάπτυξη και δοκιμές
+# Gems for development and testing
 gem "tzinfo-data", platforms: %i[ windows jruby ]
-gem "solid_cache"
-gem "solid_queue"
-gem "solid_cable"
 gem "bootsnap", require: false
-gem "kamal", require: false
-gem "thruster", require: false
+gem "dotenv-rails"
 
-# Bootstrap και related gems
+# Bootstrap and related gems
 gem 'bootstrap', '~> 5.0.0'
 gem 'sassc-rails', '>= 2.1.2'
 gem 'jquery-rails'
@@ -32,17 +28,19 @@ gem 'bootstrap_form'
 # Authentication
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-google-oauth2' # Για Google
-gem 'omniauth-facebook' # Για Facebook
-gem 'omniauth-twitter' # Για Twitter
+gem 'omniauth-google-oauth2' # For Google
+gem 'omniauth-facebook' # For Facebook
+gem 'omniauth-twitter' # For Twitter
 
+# Testing gems
 gem 'rspec-rails', '~> 6.0'
 gem 'rails-controller-testing'
-gem 'headless'
-gem 'database_cleaner-active_record'
+gem 'database_cleaner-active_record', '~> 2.0'
 
-
-gem 'dotenv-rails'
+# Browser automation
+gem 'selenium-webdriver'
+gem 'capybara', '~> 3.35'
+gem 'cuprite' # For headless browser testing
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
@@ -55,7 +53,5 @@ group :development do
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
   gem 'factory_bot_rails'
 end
