@@ -42,6 +42,8 @@ gem 'selenium-webdriver'
 gem 'capybara', '~> 3.35'
 gem 'cuprite' # For headless browser testing
 
+gem 'faker'
+
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
