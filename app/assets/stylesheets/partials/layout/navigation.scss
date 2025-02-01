@@ -46,6 +46,8 @@ nav {
     a {
       display: block;
       padding: 10px 0px 10px 25px !important;
+      color: white; /* Διασφαλίζει το λευκό χρώμα */
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     a:hover {
@@ -60,7 +62,7 @@ nav {
 .icon-bar {
     background-color: white !important;
 }
-  
+
 .active a {
     background: $navbarColor !important;
     border-bottom: solid 5px white;
@@ -70,25 +72,72 @@ nav {
     background: $navbarColor !important;
     border-style: hidden;
 }
-  
+
+.dropdown-menu {
+  background: $navbarColor !important; /* Χρώμα φόντου για το dropdown */
+  border-style: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-menu a {
+  color: white; /* Λευκό χρώμα κειμένου */
+  padding: 10px 20px; /* Παρέχει padding στα items του dropdown */
+  text-decoration: none; /* Αφαιρεί την υπογράμμιση */
+}
+
 .dropdown-menu a:hover {
-    color: black !important;
-    background: white !important;
+  color: black !important;
+  background: white !important;
+}
+
+.dropdown-toggle {
+  background: $navbarColor !important;
+  color: white; /* Λευκό χρώμα κειμένου */
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none; /* Αφαιρεί την γραμμή περιγράμματος */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Ομαλή μετάβαση */
+}
+
+.dropdown-toggle:hover {
+  background: white !important;
+  color: black !important;
 }
 
 .brand-mobile {
     font-size: 40px;
 }
-  
+
 .navigation-items {
   position: relative;
   top: 0;
   left: auto;
 }
 
-  
 .navbar-header {
     .open {
       width: 36px;
     }
+}
+
+/* Προσαρμοσμένο κουμπί "Log out" */
+.btn-logout {
+  background-color: transparent; /* Διαφανές φόντο */
+  color: white; /* Λευκό χρώμα κειμένου */
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none; /* Αφαιρεί την γραμμή περιγράμματος */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Ομαλή μετάβαση */
+}
+
+/* Hover κατάσταση για το κουμπί "Log out" */
+.btn-logout:hover {
+  background-color: white; /* Λευκό φόντο κατά το hover */
+  color: black; /* Μαύρο κείμενο κατά το hover */
+}
+
+/* Τοποθέτηση του κουμπιού στη mobile-menu */
+.mobile-menu .btn-logout {
+  display: block; /* Κάνει το κουμπί μπλοκ στοιχείο */
+  padding: 10px 25px !important; /* Εξαναγκασμένο padding για ομοιόμορφο στυλ */
 }
