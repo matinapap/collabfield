@@ -1,1 +1,16 @@
-<h1>Home page</h1>
+<div class="container">
+  <div class="row">
+    <div id="side-menu" class="col-sm-3">
+      <!-- Εδώ μπορείς να προσθέσεις το περιεχόμενο του side-menu -->
+    </div><!-- side-menu -->
+
+    <div id="main-content" class="col-sm-9">
+      <% if @posts.present? %>
+        <%= render @posts %>
+      <% else %>
+        <p>No posts available at the moment.</p>
+      <% end %>
+    </div><!-- main-content -->
+
+  </div><!-- row -->
+</div><!-- container -->
