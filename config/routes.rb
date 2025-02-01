@@ -12,6 +12,12 @@ Rails.application.routes.draw do
   end
 
   # Άλλες διαδρομές
-  resources :posts
+  resources :posts do
+    collection do
+      get 'hobby'
+      get 'study'
+      get 'team'
+    end
+  end
   root to: 'pages#index'
 end
