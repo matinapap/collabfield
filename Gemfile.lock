@@ -175,6 +175,18 @@ GEM
     json (2.9.1)
     jwt (2.10.1)
       base64
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     language_server-protocol (3.17.0.4)
     logger (1.6.5)
     loofah (2.24.0)
@@ -452,6 +464,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  kaminari
   omniauth
   omniauth-facebook
   omniauth-google-oauth2

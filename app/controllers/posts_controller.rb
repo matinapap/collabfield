@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   def index
+    @categories = Category.all
     @posts = Post.includes(:category).all
   end
 
@@ -12,26 +13,29 @@ class PostsController < ApplicationController
   end
 
   def hobby
-    @posts = Post.where(category: 'hobby').paginate(page: params[:page], per_page: 10)
-    @categories = Category.all
+    @categories = Category.where(branch: 'hobby')  # Φορτώνουμε τις κατηγορίες που ανήκουν στο 'hobby'
+    @posts = Post.where(category_id: @categories.pluck(:id))
+    posts_for_branch(params[:action])
   end
 
   def study
-    @posts = Post.where(category: 'study').paginate(page: params[:page], per_page: 10)
-    @categories = Category.all
+    @categories = Category.where(branch: 'study')  # Φορτώνουμε τις κατηγορίες που ανήκουν στο 'hobby'
+    @posts = Post.where(category_id: @categories.pluck(:id))
+    posts_for_branch(params[:action])
   end
 
   def team
-    @posts = Post.where(category: 'team').paginate(page: params[:page], per_page: 10)
-    @categories = Category.all
+    @categories = Category.where(branch: 'team')  # Φορτώνουμε τις κατηγορίες που ανήκουν στο 'hobby'
+    @posts = Post.where(category_id: @categories.pluck(:id))
+    posts_for_branch(params[:action])
   end
 
   private
 
   def posts_for_branch(branch)
     @categories = Category.where(branch: branch)
-    @posts = Post.where(category: params[:category]).paginate(page: params[:page], per_page: 10)
-  end
+    @posts = Post.where(category_id: @categories.pluck(:id))
+  end  
 
   def no_posts_partial_path
     @posts.empty? ? 'posts/branch/no_posts' : 'shared/empty_partial'

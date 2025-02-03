@@ -45,6 +45,7 @@ gem 'will_paginate', '~> 3.1.0'
 
 gem 'faker'
 gem 'pagy'
+gem 'kaminari'
 
 
 group :development, :test do
