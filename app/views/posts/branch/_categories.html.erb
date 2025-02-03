@@ -1,0 +1,20 @@
+<% branch_path_name = "#{params[:action]}_posts_path" %>
+
+<div class="col-sm-12">
+  <ul class="categories-list">
+    <%= render all_categories_button_partial_path, 
+               branch_path_name: branch_path_name %>
+
+    <% if @categories.present? %>  <!-- Check if categories are present -->
+      <% @categories.each do |category| %>
+        <li class="category-item">
+          <%= link_to category.name, 
+                      send(branch_path_name, category: category.name), 
+                      class: ("selected-item" if params[:category] == category.name) %>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="category-item">No categories available.</li>  <!-- Handle no categories case -->
+    <% end %>
+  </ul>
+</div><!-- col-sm-12 -->

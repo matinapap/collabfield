@@ -41,8 +41,11 @@ gem 'database_cleaner-active_record', '~> 2.0'
 gem 'selenium-webdriver'
 gem 'capybara', '~> 3.35'
 gem 'cuprite' # For headless browser testing
+gem 'will_paginate', '~> 3.1.0'
 
 gem 'faker'
+gem 'pagy'
+
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

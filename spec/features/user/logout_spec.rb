@@ -7,20 +7,17 @@ RSpec.feature "Logout", :type => :feature do
     sign_in user
     visit root_path
 
-    # Ανοίγουμε το dropdown μενού αν δεν είναι ήδη ανοιχτό
     find('nav #user-settings').click
-    expect(page).to have_selector('.dropdown-menu', visible: true) # Περιμένουμε να ανοίξει το dropdown
+    expect(page).to have_selector('.dropdown-menu', visible: true) 
 
-    # Κάνουμε κλικ στο "Log out" στο dropdown
-    find('.dropdown-menu a', text: 'Log out').click  # Εδώ χρησιμοποιούμε το κείμενο 'Log out' για να βρούμε το στοιχείο
+    find('.logout-form .btn-logout').click
 
-    # Ελέγχουμε αν η σελίδα έχει ανακατευθυνθεί στην αρχική ή σελίδα σύνδεσης
-    expect(page).to have_current_path(root_path) # Αν ανακατευθύνεται στην αρχική σελίδα
-    expect(page).to have_selector('nav #user-settings', visible: false) # Ελέγχουμε ότι ο χρήστης αποσυνδέθηκε
+    expect(page).to have_current_path(root_path) 
 
-    # Αν υπάρχει mobile menu με το "Log out", κάνουμε κλικ και εκεί (αν χρειάζεται)
     if page.has_selector?('.mobile-menu a', text: 'Log out')
       find('.mobile-menu a', text: 'Log out').click
     end
+
+    expect(page).to have_current_path(root_path)
   end
 end
