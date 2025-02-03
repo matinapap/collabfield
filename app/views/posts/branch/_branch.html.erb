@@ -4,13 +4,32 @@
     <%= render 'posts/branch/create_new_post', branch: branch %>
   </div><!-- row -->
 
-  <div class="row">
-    <div class="col-sm-12" id="feed">
-      <% if @posts.present? %>  <!-- Ελέγχουμε αν υπάρχουν posts -->
-        <%= render @posts %>   <!-- Εμφανίζουμε τα posts -->
-      <% else %>  
-        <%= render no_posts_partial_path %>  <!-- Εμφανίζουμε το μήνυμα αν δεν υπάρχουν posts -->
+  <h2 class="page-title">Categories</h2>
+  <div id="categories" class="categories-list">
+    <ul> 
+      <% @categories.each do |category| %>
+        <li class="category-item">
+          <%= link_to category.name, category_posts_path(category) %>
+        </li>
       <% end %>
-    </div>
-  </div><!-- row -->
+    </ul> 
+  </div>
+  
+
+
+  <div class="row">
+  <div class="col-sm-12" id="feed">
+    <% if @posts.present? %>  <!-- Ελέγχουμε αν υπάρχουν posts -->
+      <div class="posts-list">
+        <% @posts.each do |post| %>
+          <div class="single-post-list">
+            <%= render post %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>  
+      <%= render no_posts_partial_path %>  <!-- Εμφανίζουμε το μήνυμα αν δεν υπάρχουν posts -->
+    <% end %>
+  </div>
+</div><!-- row -->
 </div><!-- container -->
