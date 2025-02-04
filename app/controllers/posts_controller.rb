@@ -1,3 +1,5 @@
+before_action :redirect_if_not_signed_in, only: [:new]
+
 class PostsController < ApplicationController
   def index
     @categories = Category.all
@@ -39,6 +41,26 @@ class PostsController < ApplicationController
     @categories = Category.where(branch: 'team')  # Φορτώνουμε τις κατηγορίες που ανήκουν στο 'hobby'
     @posts = Post.where(category_id: @categories.pluck(:id))
     posts_for_branch(params[:action])
+  end
+
+  def new
+    @branch = params[:branch]
+    @categories = Category.where(branch: @branch)
+    @post = Post.new
+  end
+
+  def create
+    @post = Post.new(post_params)
+    if @post.save 
+      redirect_to post_path(@post) 
+    else
+      redirect_to root_path
+    end
+  end
+
+  def post_params
+    params.require(:post).permit(:content, :title, :category_id)
+                         .merge(user_id: current_user.id)
   end
 
   private
