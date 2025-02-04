@@ -2,8 +2,17 @@
   <div class="row">
     <h1 class="page-title"><%= page_title %></h1>
     <%= render 'posts/branch/create_new_post', branch: branch %>
+    <%= form_with(url: posts_path, method: :get, local: true, id: "search-form") do |form| %>
+  <div class="search-input-container">
+    <!-- Εισαγωγή για το πεδίο αναζήτησης με κλάση search -->
+    <%= form.text_field :search, placeholder: "Search posts...", class: "search-input", id: "search" %>
+    <!-- Κουμπί αναζήτησης με κλάση search-btn -->
+    <%= form.submit "Search", class: "search-btn" %>
+<% end %>
+
   </div><!-- row -->
 
+  </div><!-- row -->
   <h2 class="page-title">Categories</h2>
   <div id="categories" class="categories-list">
     <ul> 
@@ -15,25 +24,15 @@
     </ul> 
   </div>
   
-  <div class="row">
-  <%= render  'posts/branch/search_form', 
-              branch: branch,
-              search_placeholder: search_placeholder %>
-</div><!-- row -->
+
 
   <div class="row">
-  <div class="col-sm-12" id="feed">
-    <% if @posts.present? %>  <!-- Ελέγχουμε αν υπάρχουν posts -->
-      <div class="posts-list">
-        <% @posts.each do |post| %>
-          <div class="single-post-list">
-            <%= render post %>
-          </div>
-        <% end %>
-      </div>
-    <% else %>  
-      <%= render no_posts_partial_path %>  <!-- Εμφανίζουμε το μήνυμα αν δεν υπάρχουν posts -->
-    <% end %>
-  </div>
-</div><!-- row -->
+    <div class="col-sm-12" id="feed">
+      <% if @posts.present? %>  <!-- Ελέγχουμε αν υπάρχουν posts -->
+        <%= render @posts %>   <!-- Εμφανίζουμε τα posts -->
+      <% else %>  
+        <%= render no_posts_partial_path %>  <!-- Εμφανίζουμε το μήνυμα αν δεν υπάρχουν posts -->
+      <% end %>
+    </div>
+  </div><!-- row -->
 </div><!-- container -->

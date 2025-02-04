@@ -2,6 +2,17 @@ class PostsController < ApplicationController
   def index
     @categories = Category.all
     @posts = Post.includes(:category).all
+
+     # Φιλτράρισμα με βάση το branch και την κατηγορία
+     if params[:branch].present? && params[:category].present?
+      @posts = @posts.by_category(params[:branch], params[:category])
+    # Φιλτράρισμα μόνο με βάση το branch
+    elsif params[:branch].present?
+      @posts = @posts.by_branch(params[:branch])
+    # Αναζήτηση
+    elsif params[:search].present?
+      @posts = @posts.search(params[:search])
+    end
   end
 
   def show
@@ -38,7 +49,7 @@ class PostsController < ApplicationController
   end  
 
   def no_posts_partial_path
-    @posts.empty? ? 'posts/branch/no_posts' : 'shared/empty_partial'
+    @posts.empty? ? 'posts/shared/_no_posts.html.erb' : 'shared/empty_partial'
   end
 
   def get_posts
@@ -56,5 +67,6 @@ class PostsController < ApplicationController
       posts = Post.by_category(branch, category).search(search)
     else
     end
+     @posts = posts
   end
 end

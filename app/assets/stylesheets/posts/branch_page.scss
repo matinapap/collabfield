@@ -107,6 +107,7 @@
 /* Μορφοποίηση του φόρμας αναζήτησης */
 #search-form {
   position: relative;
+  background: url('https://example.com/search-icon.png') no-repeat left center;
   
   input {
     border: solid 2px rgba(0, 0, 0, 0.2);
@@ -177,4 +178,9 @@
     margin: 10px 0;
     padding-left: 30px;
   }
+  /* Κρύβουμε το κουμπί αναζήτησης */
+.search-btn {
+  display: none;
+}
+
 }
