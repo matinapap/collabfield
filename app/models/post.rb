@@ -4,6 +4,10 @@ class Post < ApplicationRecord
 
   default_scope -> { includes(:user).order(created_at: :desc) }
 
+  validates :title, presence: true, length: { minimum: 5, maximum: 255 }
+  validates :content, presence: true, length: { minimum: 20, maximum: 1000 }
+  validates :category_id, presence: true
+
    # Scope για φιλτράρισμα posts ανά κατηγορία και branch
    scope :by_category, -> (branch, category_name) do 
     joins(:category).where(categories: {name: category_name, branch: branch}) 
