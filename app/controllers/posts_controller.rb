@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :redirect_if_not_signed_in, only: [:new]
-  
+
   def index
     @categories = Category.all
     @posts = Post.includes(:category).all
@@ -58,10 +58,10 @@ class PostsController < ApplicationController
     end
   end
 
-  def post_params
-    params.require(:post).permit(:content, :title, :category_id)
-                         .merge(user_id: current_user.id)
-  end
+  # def post_params
+  #   params.require(:post).permit(:content, :title, :category_id)
+  #                        .merge(user_id: current_user.id)
+  # end
 
   private
 
@@ -72,6 +72,14 @@ class PostsController < ApplicationController
 
   def no_posts_partial_path
     @posts.empty? ? 'posts/shared/_no_posts.html.erb' : 'shared/empty_partial'
+  end
+
+  def set_categories
+    @categories = Category.all
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content, :category_id).merge(user_id: current_user.id)
   end
 
   def get_posts
