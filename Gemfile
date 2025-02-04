@@ -20,7 +20,7 @@ gem "bootsnap", require: false
 gem "dotenv-rails"
 
 # Bootstrap and related gems
-gem 'bootstrap', '~> 5.0.0'
+gem 'bootstrap', '~> 5.3.3'
 gem 'sassc-rails', '>= 2.1.2'
 gem 'jquery-rails'
 gem 'bootstrap_form'
