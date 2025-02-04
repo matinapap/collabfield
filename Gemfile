@@ -33,7 +33,7 @@ gem 'omniauth-facebook' # For Facebook
 gem 'omniauth-twitter' # For Twitter
 
 # Testing gems
-gem 'rspec-rails', '~> 6.0'
+gem 'rspec-rails', '~> 7.1'
 gem 'rails-controller-testing'
 gem 'database_cleaner-active_record', '~> 2.0'
 
