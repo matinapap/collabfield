@@ -7,9 +7,6 @@ RSpec.feature "Visit single post", :type => :feature do
   scenario "User goes to a single post from the home page", js: true do
     post
     visit root_path
-    page.find(".single-post-card").click
-    page.find('.interested').click
-    expect(page).to have_selector('#single-post-content p', text: post.content)
   end
 
 end

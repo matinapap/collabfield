@@ -2,8 +2,12 @@ require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
   describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+    it "returns a successful response" do
+      get posts_path  # Στέλνει το αίτημα GET στο posts_path
+      expect(response).to be_successful  # Ελέγχει αν η απόκριση είναι επιτυχής
+    end
   end
+  
 
   context 'Scopes' do
     it 'default_scope orders by descending created_at' do

@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
+  let(:category) { Category.create(name: "Test Category") }
+
+  let(:post) { create(:post, category: category) }
+
+
   context 'Associations' do
     it 'belongs_to user' do
       association = described_class.reflect_on_association(:user).macro
@@ -52,6 +57,7 @@ RSpec.describe Post, type: :model do
     let(:post) { build(:post) }
   
     it 'creates succesfully' do 
+      post = build(:post, category_id: category.id)  # Ανάθεση κατηγορίας στο post
       expect(post).to be_valid
     end
   

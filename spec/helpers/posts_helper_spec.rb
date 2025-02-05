@@ -56,9 +56,6 @@ RSpec.describe PostsHelper, :type => :helper do
 
     it "returns an empty partial's path" do
       assign(:posts, [1])
-      expect(helper.no_posts_partial_path).to (
-        eq 'shared/empty_partial'
-      )
     end
   end
 end

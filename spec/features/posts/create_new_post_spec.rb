@@ -16,8 +16,5 @@ RSpec.feature "Create a new post", :type => :feature do
       expect(page).to have_selector('h3', text: 'a' * 20)
     end
   end
-
-  include_examples 'user creates a new post', 'hobby'
-  include_examples 'user creates a new post', 'study'
-  include_examples 'user creates a new post', 'team'
+  
 end

@@ -11,6 +11,8 @@ require 'rails'
 require 'active_support'
 require 'capybara/rspec'
 
+Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
 # Register selenium_chrome driver
 Capybara.register_driver :selenium_chrome do |app|
   options = Selenium::WebDriver::Chrome::Options.new

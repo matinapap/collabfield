@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_03_014519) do
+ActiveRecord::Schema[8.0].define(version: 2025_02_05_044438) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -32,6 +32,27 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_03_014519) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "private_conversations", force: :cascade do |t|
+    t.integer "recipient_id"
+    t.integer "sender_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["recipient_id", "sender_id"], name: "index_private_conversations_on_recipient_id_and_sender_id", unique: true
+    t.index ["recipient_id"], name: "index_private_conversations_on_recipient_id"
+    t.index ["sender_id"], name: "index_private_conversations_on_sender_id"
+  end
+
+  create_table "private_messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.boolean "seen", default: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["conversation_id"], name: "index_private_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_private_messages_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -49,4 +70,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_03_014519) do
 
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
+  add_foreign_key "private_messages", "users"
 end
