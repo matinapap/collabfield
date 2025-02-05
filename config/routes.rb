@@ -1,21 +1,23 @@
 Rails.application.routes.draw do
   # Devise με OmniAuth
-  devise_for :users, :controllers => {:registrations => "registrations"}, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
 
   # Login route για απλή σύνδεση
   devise_scope :user do
     get 'login', to: 'devise/sessions#new'
   end
 
-  resources :categories do
-    resources :posts
-  end
-
+  # Route για εγγραφή νέου χρήστη
   devise_scope :user do
     get 'signup', to: 'devise/registrations#new'
   end
 
-  # Άλλες διαδρομές
+  # Κατηγορίες και δημοσιεύσεις
+  resources :categories do
+    resources :posts
+  end
+
+  # Δημοσιεύσεις με επιπλέον φίλτρα (hobby, study, team)
   resources :posts do
     collection do
       get 'hobby'
@@ -23,15 +25,20 @@ Rails.application.routes.draw do
       get 'team'
     end
   end
+
+  # Αρχική σελίδα
   root to: 'pages#index'
 
-  namespace :private do 
+  # Ιδιωτικές συνομιλίες και μηνύματα
+  namespace :private do
     resources :conversations, only: [:create] do
       member do
         post :close
       end
     end
     resources :messages, only: [:index, :create]
-  end  
+  end
 
+  # Ιδιωτικές συνομιλίες εκτός namespace
+  resources :private_conversations, only: [:index, :show, :create, :destroy]
 end
