@@ -1,0 +1,9 @@
+<% if @private_conversations_windows.any? %>
+  <% @private_conversations_windows.each do |conversation| %>
+    <%= render partial: "private/conversations/conversation", 
+               locals: { conversation: conversation, 
+                         user: current_user } %>
+  <% end %>
+<% else %>
+  <p>No active conversations</p>
+<% end %>

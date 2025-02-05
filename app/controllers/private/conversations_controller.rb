@@ -14,4 +14,26 @@ class Private::ConversationsController < ApplicationController
       redirect_to request.referer || root_path
     end
   end
+
+  def opened_conversations_windows
+    if user_signed_in?
+      session[:private_conversations] ||= []
+      @private_conversations_windows = Private::Conversation.includes(:recipient, :messages)
+                                      .find(session[:private_conversations])
+    else
+      @private_conversations_windows = []
+    end
+  end
+  
+
+  private
+
+  def add_to_conversations
+    session[:private_conversations] ||= []
+    session[:private_conversations] << @conversation.id
+  end
+  
+  def already_added?
+    session[:private_conversations].include?(@conversation.id)
+  end
 end
