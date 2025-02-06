@@ -24,4 +24,13 @@ Rails.application.routes.draw do
     end
   end
   root to: 'pages#index'
+
+  namespace :private do 
+    resources :conversations, only: [:create] do
+      member do
+        post :close
+      end
+    end
+    resources :messages, only: [:index, :create]
+  end
 end

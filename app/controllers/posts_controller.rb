@@ -18,12 +18,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
-    
-    unless @post
-      redirect_to posts_path, alert: "Το post δεν βρέθηκε."
+    @post = Post.find_by(id: params[:id])  # Επιστρέφει nil αν το post δεν βρεθεί
+    if @post.nil?
+      redirect_to root_path, alert: "Το post δεν βρέθηκε."
     end
   end
+  
 
   def hobby
     @categories = Category.where(branch: 'hobby')  # Φορτώνουμε τις κατηγορίες που ανήκουν στο 'hobby'
@@ -58,10 +58,18 @@ class PostsController < ApplicationController
     end
   end
 
-  # def post_params
-  #   params.require(:post).permit(:content, :title, :category_id)
-  #                        .merge(user_id: current_user.id)
-  # end
+  
+  def check_if_message_sent(post)
+    return false unless current_user
+  
+    if post.nil?
+      return false
+    end
+  
+    conversation = Private::Conversation.find_by(post_id: post.id, sender_id: current_user.id)
+    !conversation.nil? 
+  end  
+  
 
   private
 

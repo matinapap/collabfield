@@ -25,10 +25,6 @@
    <%= f.submit "Log in", class: 'form-control login-button' %>
 <% end %>
 
-<%= link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, class: "btn btn-danger" %>
-<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, class: "btn btn-primary" %>
-<%= link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path, class: "btn btn-info" %>
-
 
 <%= render "devise/shared/links" %>
     </div>
