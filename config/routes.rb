@@ -30,12 +30,13 @@ Rails.application.routes.draw do
   root to: 'pages#index'
 
   # Ιδιωτικές συνομιλίες και μηνύματα
-  namespace :private do
-    resources :conversations do
+  namespace :private do 
+    resources :conversations, only: [:create] do
       member do
-        delete 'close_conversation', to: 'conversations#close_conversation'
+        post :close
       end
     end
+    resources :messages, only: [:index, :create]
   end
 
   # Ιδιωτικές συνομιλίες εκτός namespace
