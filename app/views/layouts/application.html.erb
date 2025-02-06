@@ -1,0 +1,34 @@
+<%= render 'posts/modal' %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title><%= content_for(:title) || "Collabfield" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css", media: "all" %>
+    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js", defer: true %>
+    <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js", defer: true %>
+
+    <%= yield :head %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag 'application', media: 'all', "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track": "reload" %>
+
+    <%= javascript_include_tag 'application', type: "module" %>
+  </head>
+
+  <body>
+    <%= render "layouts/navigation" %>
+    <%= yield %>
+  </body>
+</html>
