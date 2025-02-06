@@ -1,8 +1,0 @@
-// JavaScript code to remove the conversation from the DOM
-$('body')
-    .find("[data-pconversation-id='" + "<%= params[:id] %>" + "']")
-    .parent()
-    .remove();
-
-// Reposition the remaining chat windows
-positionChatWindows();

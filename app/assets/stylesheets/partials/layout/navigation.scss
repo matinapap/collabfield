@@ -1,3 +1,7 @@
+body {
+  margin-top: 50px;
+}
+
 nav {
   .col-sm-5, .col-sm-7 {
     padding-top: 0px;
@@ -31,7 +35,7 @@ nav {
 }
 
 .pc-menu {
-    margin-left: 1000px;
+    margin-right: 10px;
 }
   
 .mobile-menu {
@@ -46,8 +50,6 @@ nav {
     a {
       display: block;
       padding: 10px 0px 10px 25px !important;
-      color: white; /* Διασφαλίζει το λευκό χρώμα */
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
 
     a:hover {
@@ -58,11 +60,11 @@ nav {
       }
     }
 }
-
+  
 .icon-bar {
     background-color: white !important;
 }
-
+  
 .active a {
     background: $navbarColor !important;
     border-bottom: solid 5px white;
@@ -72,72 +74,178 @@ nav {
     background: $navbarColor !important;
     border-style: hidden;
 }
-
-.dropdown-menu {
-  background: $navbarColor !important; /* Χρώμα φόντου για το dropdown */
-  border-style: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.dropdown-menu a {
-  color: white; /* Λευκό χρώμα κειμένου */
-  padding: 10px 20px; /* Παρέχει padding στα items του dropdown */
-  text-decoration: none; /* Αφαιρεί την υπογράμμιση */
-}
-
+  
 .dropdown-menu a:hover {
-  color: black !important;
-  background: white !important;
-}
-
-.dropdown-toggle {
-  background: $navbarColor !important;
-  color: white; /* Λευκό χρώμα κειμένου */
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: none; /* Αφαιρεί την γραμμή περιγράμματος */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Ομαλή μετάβαση */
-}
-
-.dropdown-toggle:hover {
-  background: white !important;
-  color: black !important;
+    color: black !important;
+    background: white !important;
 }
 
 .brand-mobile {
-    font-size: 40px;
+    font-size: 20px;
 }
-
+  
 .navigation-items {
-  position: relative;
-  top: 0;
-  left: auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
 }
-
+  
 .navbar-header {
     .open {
       width: 36px;
     }
 }
+  
+.non-user-nav-links {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    padding-right: 20px;
+}
+  
+#conversations-menu, #contacts-requests {
+    font-size: 20px;
+    font-size: 2.0rem;
+    height: 50px;
+    line-height: 50px;
+    padding-right: 10px;
+  
+    ul {
+      margin: 0;
+      position: relative;
+      top: 50px;
+      right: 200px;
+      border-radius: 0 0 5px 5px;
+      height: 300px;
+      overflow: scroll;
+      overflow-x: hidden;
+      
+      li {
+        a {
+          width: 100%;
+        }
+      }
+    }
+    .unseen-conv {
+      a {
+        background: $backgroundColor;
+        color: black !important;
+      }
+    }
+}
+  
+#unseen-conversations, #unresponded-contact-requests {
+    visibility: hidden;
+    padding: 1px;
+    position: absolute;
+    // color: white;
+    font-size: 13px;
+}
+  
+#unseen-conversations {
+    right: 5px;
+    background: #E92F2F;
+}
+  
+#conversations-menu {
+    i {
+      position: relative;
+    }
+}
+  
+#conversations-list {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 0;
 
-/* Προσαρμοσμένο κουμπί "Log out" */
-.btn-logout {
-  background-color: transparent; /* Διαφανές φόντο */
-  color: white; /* Λευκό χρώμα κειμένου */
-  padding: 10px 20px;
-  border-radius: 4px;
-  border: none; /* Αφαιρεί την γραμμή περιγράμματος */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Ομαλή μετάβαση */
+    .col-sm-2 {
+      padding: 0;
+    }
 }
 
-/* Hover κατάσταση για το κουμπί "Log out" */
-.btn-logout:hover {
-  background-color: white; /* Λευκό φόντο κατά το hover */
-  color: black; /* Μαύρο κείμενο κατά το hover */
+#contacts-requests {
+    li {
+      color: black;
+      background-color: $backgroundColor;
+      border-bottom: 1px solid $navbarColor;
+    }
+
+    i {
+      position: relative;
+    }
+
+    .sixty-percent {
+      display: inline-block;
+      width: 60%;
+    }
+
+    .forty-percent {
+      display: inline-block;
+      width: 40%;
+    }
+
+    .contact-request, .contact-request-responded {
+      .contact-name {
+        padding-left: 10px;
+        padding-right: 20px;
+      }
+
+      .accept-request, .decline-request {
+
+        a {
+          border: 2px solid $navbarColor;
+          padding: 5px;
+        }
+
+        &:hover a {
+          border-color: black;
+        }
+
+        transition: 0.15s border-color;
+        transition: 0.15s background-color;
+      }
+
+      .accept-request {
+
+        a:hover {
+          background-color: black !important;
+        }
+
+        a {
+          background-color: $navbarColor;
+          color: white !important;
+        }
+      }
+
+      .decline-request {
+        a {
+          background-color: $backgroundColor;
+          color: black !important;
+        }
+
+        a:hover, &:hover {
+          background-color: white !important;
+        }
+      }
+
+      .accepted-request {
+        background: $navbarColor;
+        color: white;
+        padding: 5px;
+      }
+    }
+
+    .no-requests {
+      text-align: center;
+    }
+    
+}
+  
+#unresponded-contact-requests {
+    top: 0;
+    right: 5px;
+    background: #3F4EBF;
 }
 
-/* Τοποθέτηση του κουμπιού στη mobile-menu */
-.mobile-menu .btn-logout {
-  display: block; /* Κάνει το κουμπί μπλοκ στοιχείο */
-  padding: 10px 25px !important; /* Εξαναγκασμένο padding για ομοιόμορφο στυλ */
-}

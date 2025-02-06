@@ -19,20 +19,15 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
-
 development:
-  adapter: postgresql
-  encoding: unicode
-  database: collabfield_development
-  pool: 5
-  username: collabfield
-  password: 123
+  <<: *default
+  database: forum_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
   # the same name as the operating system user running Rails.
-  #username: collabfield
+  #username: forum
 
   # The password associated with the PostgreSQL role (username).
   #password:
@@ -60,10 +55,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: collabfield_test
-  username: collabfield
-  password: 123  # Εδώ βάζεις τον σωστό κωδικό πρόσβασης
-
+  database: forum_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -86,20 +78,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
-    <<: *default
-    database: collabfield_production
-    username: collabfield
-    password: <%= ENV["COLLABFIELD_DATABASE_PASSWORD"] %>
-  cache:
-    <<: *primary_production
-    database: collabfield_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: collabfield_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: collabfield_production_cable
-    migrations_paths: db/cable_migrate
+  <<: *default
+  database: forum_production
+  username: forum
+  password: <%= ENV["FORUM_DATABASE_PASSWORD"] %>

@@ -1,11 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  let(:category) { Category.create(name: "Test Category") }
-
-  let(:post) { create(:post, category: category) }
-
-
   context 'Associations' do
     it 'belongs_to user' do
       association = described_class.reflect_on_association(:user).macro
@@ -24,7 +19,7 @@ RSpec.describe Post, type: :model do
       second_post = create(:post)
       expect(Post.all).to eq [second_post, first_post]
     end
-  
+    
     it 'by_category scope gets posts by particular category' do
       category = create(:category)
       create(:post, category_id: category.id)
@@ -57,7 +52,6 @@ RSpec.describe Post, type: :model do
     let(:post) { build(:post) }
   
     it 'creates succesfully' do 
-      post = build(:post, category_id: category.id)  # Ανάθεση κατηγορίας στο post
       expect(post).to be_valid
     end
   
@@ -100,6 +94,5 @@ RSpec.describe Post, type: :model do
       post.content = 'a' * 1050
       expect(post).not_to be_valid
     end
-  end
-  
+  end 
 end

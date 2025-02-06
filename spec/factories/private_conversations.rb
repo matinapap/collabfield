@@ -5,7 +5,7 @@ FactoryBot.define do
   
       factory :private_conversation_with_messages do
         transient do
-          messages_count { 1 }
+            messages_count { 1 }
         end
   
         after(:create) do |private_conversation, evaluator|
@@ -15,4 +15,3 @@ FactoryBot.define do
       end
     end
   end
-  

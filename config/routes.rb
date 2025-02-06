@@ -1,23 +1,21 @@
 Rails.application.routes.draw do
-  # Devise με OmniAuth
-  devise_for :users, controllers: { registrations: 'registrations', omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, :controllers => {:registrations => "registrations"}
+  get "up" => "rails/health#show", as: :rails_health_check
 
-  # Login route για απλή σύνδεση
+  root to: 'pages#index'
+
   devise_scope :user do
     get 'login', to: 'devise/sessions#new'
   end
 
-  # Route για εγγραφή νέου χρήστη
   devise_scope :user do
     get 'signup', to: 'devise/registrations#new'
   end
 
-  # Κατηγορίες και δημοσιεύσεις
-  resources :categories do
-    resources :posts
+  devise_scope :user do
+    get 'signout', to: 'devise/sessions#destroy'
   end
 
-  # Δημοσιεύσεις με επιπλέον φίλτρα (hobby, study, team)
   resources :posts do
     collection do
       get 'hobby'
@@ -26,19 +24,31 @@ Rails.application.routes.draw do
     end
   end
 
-  # Αρχική σελίδα
-  root to: 'pages#index'
-
-  # Ιδιωτικές συνομιλίες και μηνύματα
   namespace :private do 
     resources :conversations, only: [:create] do
       member do
         post :close
+        post :open
       end
     end
     resources :messages, only: [:index, :create]
   end
 
-  # Ιδιωτικές συνομιλίες εκτός namespace
-  resources :private_conversations, only: [:index, :show, :create, :destroy]
+  namespace :group do 
+    resources :conversations do
+      member do
+        post :close
+        post :open
+      end
+    end
+    resources :messages, only: [:index, :create]
+  end
+
+  resources :contacts, only: [:create, :update, :destroy]
+
+  get 'messenger', to: 'messengers#index'
+  get 'get_private_conversation', to: 'messengers#get_private_conversation'
+  get 'get_group_conversation', to: 'messengers#get_group_conversation'
+  get 'open_messenger', to: 'messengers#open_messenger'
+
 end

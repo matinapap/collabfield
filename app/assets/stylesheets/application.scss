@@ -1,20 +1,19 @@
+//Boostrap
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
 // Variables
 @import "base/variables";
+
 // Default styles
 @import "base/default";
 
 // Partials - main css files
-@import "partials/layout/*";
-// Partials - main css files
 @import "partials/*";
+@import "partials/layout/*";
+@import "partials/posts/*";
 
 // Media queries for a responsive design
 @import "responsive/*";
 
-
-@import "partials/posts/*";
-@import "posts/*";
-
-
+ 

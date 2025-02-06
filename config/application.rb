@@ -2,27 +2,16 @@ require_relative "boot"
 
 require "rails/all"
 
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module Collabfield
+module Forum
   class Application < Rails::Application
-    # Αρχικοποίηση των προεπιλεγμένων ρυθμίσεων για τη γεννήτρια της έκδοσης Rails.
-    config.load_defaults 8.0
+    config.load_defaults 7.1
+
+    config.autoload_lib(ignore: %w(assets tasks))
 
     config.action_controller.include_all_helpers = false
-
-    # Ρύθμιση του Asset Pipeline μέσα στο after_initialize για να διασφαλίσουμε ότι όλα έχουν φορτωθεί
-    config.after_initialize do
-      Rails.application.config.assets.configure do |env|
-        env.export_concurrent = false
-      end
-    end
-
-    ENV['GOOGLE_CLIENT_ID'] = "your_google_client_id"
-ENV['GOOGLE_CLIENT_SECRET'] = "your_google_client_secret"
-
-    # Άλλες ρυθμίσεις...
+    
+    config.autoload_lib(ignore: %w(assets tasks))
   end
 end

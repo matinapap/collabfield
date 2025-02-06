@@ -2,79 +2,93 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
-# Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if ENV['RAILS_ENV'] == 'production'
+require File.expand_path('../config/environment', __dir__)
 
-require_relative '../config/environment'
+# Prevent database truncation if the environment is production
+abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
-require 'rails'
-require 'active_support'
+require 'capybara/poltergeist'
+require 'factory_bot_rails'
 require 'capybara/rspec'
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
-# Register selenium_chrome driver
-Capybara.register_driver :selenium_chrome do |app|
-  options = Selenium::WebDriver::Chrome::Options.new
-  options.add_argument('--headless')  # Uncomment this line for headless mode
-  options.add_argument('--disable-gpu')  # Optional for Windows
-  
-  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
-end
+# Add additional requires below this line. Rails is not loaded until this point!
 
-Capybara.default_driver = :selenium_chrome
-Capybara.javascript_driver = :selenium_chrome
-Capybara.server = :puma
-
-# Requires supporting ruby files with custom matchers and macros, etc, in spec/support/
-Rails.root.glob('spec/support/**/*.rb').sort_by(&:to_s).each { |f| require f }
+# Requires supporting ruby files with custom matchers and macros, etc, in
+# spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
+# run as spec files by default. This means that files in spec/support that end
+# in _spec.rb will both be required and run as specs, causing the specs to be
+# run twice. It is recommended that you do not name files matching this glob to
+# end with _spec.rb. You can configure this pattern with the --pattern
+# option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
+#
+# The following line is provided for convenience purposes. It has the downside
+# of increasing the boot-up time by auto-requiring all files in the support
+# directory. Alternatively, in the individual `*_spec.rb` files, manually
+# require only the support files necessary.
+#
+# Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # Checks for pending migrations and applies them before tests are run.
+# If you are not using ActiveRecord, you can remove these lines.
+# Corrected line:
 begin
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
+  puts e.to_s.strip
+  exit 1
 end
-
 RSpec.configure do |config|
+  # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
+  config.fixture_path = "#{::Rails.root}/test/fixtures"
+
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include FactoryBot::Syntax::Methods
-  config.fixture_paths = [Rails.root.join('spec/fixtures')]
+  Capybara.javascript_driver = :selenium_chrome_headless
+  Capybara.server = :puma 
+  Capybara.default_max_wait_time = 5
+  # If you're not using ActiveRecord, or you'd prefer not to run each of your
+  # examples within a transaction, remove the following line or assign false
+  # instead of true.
+  config.use_transactional_fixtures = false 
 
   config.before(:suite) do
-    if ActiveRecord::Base.connection.tables.empty?
-      Rails.application.load_tasks
-      Rake::Task['db:create'].invoke
-      Rake::Task['db:schema:load'].invoke
-    end
-  end
-
-  config.use_transactional_fixtures = false
-
-  config.before(:suite) do
-    DatabaseCleaner.allow_remote_database_url = true # Προσθήκη αν χρειάζεται
     DatabaseCleaner.clean_with(:truncation)
   end
-
+ 
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end
-
-  config.before(:each, js: true) do
+ 
+  config.before(:each, :js => true) do
     DatabaseCleaner.strategy = :truncation
   end
-
+ 
   config.before(:each) do
     DatabaseCleaner.start
   end
-
+ 
   config.after(:each) do
     DatabaseCleaner.clean
   end
 
-  # Include Devise helpers for feature specs
-  config.include Devise::Test::IntegrationHelpers, type: :feature
-  
-  # Configure RSpec to infer spec type based on file location
+  # RSpec Rails can automatically mix in different behaviours to your tests
+  # based on their file location, for example enabling you to call `get` and
+  # `post` in specs under `spec/controllers`.
+  #
+  # You can disable this behaviour by removing the line below, and instead
+  # explicitly tag your specs with their type, e.g.:
+  #
+  #     RSpec.describe UsersController, :type => :controller do
+  #       # ...
+  #     end
+  #
+  # The different available types are documented in the features, such as in
+  # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+  # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
+  # arbitrary gems may also be filtered via:
+  # config.filter_gems_from_backtrace("gem name")
 end

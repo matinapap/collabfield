@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'ef2aeb28cbfb4d5ab587e8671bc48123fb8d815f042d1f0769e9a0aaac6fe7773ede66f7ca821fa9e039cb8a6a1308833bf72590d8138eef86a861fc64e1b03b'
+  # config.secret_key = '6602a31de8ec54ed061ab3a88909cc9f823d7173a84de3afdfc63f78ec15842e85d1018722bf6efdc102c0a6f9da51ea8bc3dc8b928c3ca900c319555ff0eabf'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -31,12 +31,6 @@ Devise.setup do |config|
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
-
-  config.omniauth :google_oauth2, "GOOGLE_CLIENT_ID", "GOOGLE_CLIENT_SECRET", scope: 'email,profile'
-  config.omniauth :facebook, "FACEBOOK_APP_ID", "FACEBOOK_APP_SECRET", scope: 'email'
-  config.omniauth :twitter, "TWITTER_API_KEY", "TWITTER_API_SECRET"
-  
-
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -132,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '902dafdf655769bc57249eaaaf5b2e0ebe2b13fe42bad7736c2335fa1f9ebac020fbdce731de1e7a5b7bed3208113d26687a410a2e9b19d15893d75dca57e4ab'
+  # config.pepper = '9e15fff0f79a42ecfe30c1be13211946ddaabddd6eadab1e74fd4ecd342046fc4e951112225f2af4128c564b6bcf4989f7cee6099bc82bea78d125409191f471'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false

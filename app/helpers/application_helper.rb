@@ -1,9 +1,19 @@
-require_dependency 'navigation_helper'
+require_relative 'navigation_helper'
 
 module ApplicationHelper
   include NavigationHelper
-  include Private::ConversationsHelper
   include PostsHelper
+  include Private::ConversationsHelper
   include Private::MessagesHelper
-  include Shared::MessagesHelper
+  include Group::ConversationsHelper
+  include Group::MessagesHelper
+
+  def private_conversations_windows
+    params[:controller] != 'messengers' ? @private_conversations_windows : []
+  end
+  
+  def group_conversations_windows
+    params[:controller] != 'messengers' ? @group_conversations_windows : []
+  end
+  
 end

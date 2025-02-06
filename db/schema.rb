@@ -10,24 +10,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_05_044438) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_23_113250) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
+  enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "branch"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "contact_id"
+    t.boolean "accepted", default: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["contact_id"], name: "index_contacts_on_contact_id"
+    t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
+
+  create_table "group_conversations", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "group_conversations_users", id: false, force: :cascade do |t|
+    t.integer "conversation_id"
+    t.integer "user_id"
+    t.index ["conversation_id"], name: "index_group_conversations_users_on_conversation_id"
+    t.index ["user_id"], name: "index_group_conversations_users_on_user_id"
+  end
+
+  create_table "group_messages", force: :cascade do |t|
+    t.string "content"
+    t.string "added_new_users"
+    t.string "seen_by"
+    t.bigint "user_id"
+    t.bigint "conversation_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["conversation_id"], name: "index_group_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_group_messages_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.text "content"
-    t.bigint "user_id", null: false
-    t.bigint "category_id", null: false
-    t.string "branch"
+    t.bigint "category_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["category_id"], name: "index_posts_on_category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -54,6 +87,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_044438) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "fullname", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -61,14 +95,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_05_044438) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
-    t.string "name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "posts", "categories"
-  add_foreign_key "posts", "users"
   add_foreign_key "private_messages", "users"
 end
