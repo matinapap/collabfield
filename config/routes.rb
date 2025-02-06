@@ -31,12 +31,11 @@ Rails.application.routes.draw do
 
   # Ιδιωτικές συνομιλίες και μηνύματα
   namespace :private do
-    resources :conversations, only: [:create] do
+    resources :conversations do
       member do
-        post :close
+        delete 'close_conversation', to: 'conversations#close_conversation'
       end
     end
-    resources :messages, only: [:index, :create]
   end
 
   # Ιδιωτικές συνομιλίες εκτός namespace

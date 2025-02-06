@@ -2,6 +2,9 @@
   <span class="contact-name-notif"><%= @recipient.name %></span>  
 </div> <!-- conversation-heading -->
 
+<%= button_to 'Close', close_conversation_private_conversation_path(conversation.id), method: :delete, remote: true, data: { 'pconversation-id': conversation.id } %>
+
+
 <!-- Close conversation button -->
 <%= link_to "X", 
             close_private_conversation_path(conversation), 
@@ -9,3 +12,5 @@
             title: 'Close', 
             remote: true, 
             method: :post %>
+
+            
